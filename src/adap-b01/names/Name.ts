@@ -7,8 +7,8 @@ export class Name {
     private delimiter: string = this.DEFAULT_DELIMITER;
 
     constructor(other: string[], delimiter?: string) {
-        if(other != undefined) this.components = other;
-        if(delimiter != undefined) this.delimiter = delimiter;
+        if(other !== undefined) this.components = other;
+        if(delimiter !== undefined) this.delimiter = delimiter;
     }
 
     /** Returns human-readable representation of Name instance */
