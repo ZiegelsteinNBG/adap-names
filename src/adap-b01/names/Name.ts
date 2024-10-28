@@ -13,7 +13,7 @@ export class Name {
     }
 
     /** Returns human-readable representation of Name instance */
-    // @methodtype mutation method: command
+    // @methodtype Query Method: Get Method
     public asNameString(delimiter: string = this.delimiter): string {
         let res: string = '';
         let size: number = this.getNoComponents();
