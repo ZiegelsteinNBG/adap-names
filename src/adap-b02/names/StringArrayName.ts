@@ -16,6 +16,7 @@ export class StringArrayName implements Name {
         let counter: number = 0;
 
         while(counter < size){
+            if(components[i] === "") continue;
             res += this.getComponent(counter);
             if(counter != size-1){
                 res += delimiter;
@@ -31,6 +32,7 @@ export class StringArrayName implements Name {
         let counter: number = 0;
 
         while(counter < size){
+            if(components[i] === "") continue;
             res += this.insertEscCh(this.getComponent(counter));
             if(counter != size-1){
                 res += DEFAULT_DELIMITER;
