@@ -91,7 +91,7 @@ export class StringName implements Name {
 
     public append(c: string): void {
         this.length ++;
-        this.name += this.insertEscCh(c);
+        this.name += this.delimiter + this.insertEscCh(c);
     }
 
     public remove(n: number): void {
