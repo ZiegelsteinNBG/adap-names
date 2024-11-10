@@ -33,7 +33,7 @@ export class StringName implements Name {
         for(let i:number = 0; i < components.length; i++){
             if(components[i] !== "")
             str += components[i] ;
-            if(i !== components.length-1) str += delimiter;
+            if(i !== components.length-1) str += this.delimiter;
         }
         return str;
     }
