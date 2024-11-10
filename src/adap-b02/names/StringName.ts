@@ -21,7 +21,8 @@ export class StringName implements Name {
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
             if(components[i] !== "")
-            str += this.replaceEscCh(components[i]) +delimiter;
+            str += this.replaceEscCh(components[i]);
+            if(i !== components.length-1) str += delimiter;
         }
         return str;
     }
@@ -31,7 +32,8 @@ export class StringName implements Name {
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
             if(components[i] !== "")
-            str += components[i] +this.delimiter;
+            str += components[i] ;
+            if(i !== components.length-1) str += delimiter;
         }
         return str;
     }
