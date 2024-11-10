@@ -20,7 +20,7 @@ export class StringName implements Name {
         const components = this.splitRespectingEscapes();
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
-            str += this.replaceEscCh(components[i]);
+            str += this.replaceEscCh(components[i]) +delimiter;
         }
         return str;
     }
@@ -29,7 +29,7 @@ export class StringName implements Name {
         const components = this.splitRespectingEscapes();
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
-            str += components[i];
+            str += components[i] +this.delimiter;
         }
         return str;
     }
