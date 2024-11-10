@@ -11,7 +11,7 @@ export class StringName implements Name {
     constructor(other: string, delimiter?: string) {
         if(other !== undefined){
             this.name = other;
-            this.length = this.splitRespectingEscapes().length;
+            this.length++;
         } 
         if(delimiter !== undefined) this.delimiter = delimiter;
     }
@@ -22,7 +22,7 @@ export class StringName implements Name {
         for(let i:number = 0; i < components.length; i++){
             if(components[i] === "") continue;
             str += this.replaceEscCh(components[i]);
-            if(i < components.length-1) str += delimiter;
+            if(i < components.length-1 && components[i+1] !== "") str += delimiter;
         }
         return str;
     }
@@ -33,7 +33,7 @@ export class StringName implements Name {
         for(let i:number = 0; i < components.length; i++){
             if(components[i] === "") continue;
             str += components[i] ;
-            if(i < components.length-1) str += this.delimiter;
+            if(i < components.length-1  && components[i+1] !== "") str += this.delimiter;
         }
         return str;
     }
