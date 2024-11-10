@@ -6,51 +6,95 @@ export class StringArrayName implements Name {
     protected delimiter: string = DEFAULT_DELIMITER;
 
     constructor(other: string[], delimiter?: string) {
-        throw new Error("needs implementation");
+        if(other !== undefined) this.components = other;
+        if(delimiter !== undefined) this.delimiter = delimiter;
     }
 
     public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation");
+        let res: string = '';
+        let size: number = this.getNoComponents();
+        let counter: number = 0;
+
+        while(counter < size){
+            res += this.getComponent(counter);
+            if(counter != size-1){
+                res += delimiter;
+            }
+            counter ++;
+        }
+        return res;
     }
 
     public asDataString(): string {
-        throw new Error("needs implementation");
+        let res: string = '';
+        let size: number = this.getNoComponents();
+        let counter: number = 0;
+
+        while(counter < size){
+            res += this.insertEscCh(this.getComponent(counter));
+            if(counter != size-1){
+                res += DEFAULT_DELIMITER;
+            }
+            counter ++;
+        }
+        return res;
     }
 
     public isEmpty(): boolean {
-        throw new Error("needs implementation");
+        return (this.getNoComponents() === 0);
     }
 
     public getDelimiterCharacter(): string {
-        throw new Error("needs implementation");
+        return this.delimiter;
     }
 
     public getNoComponents(): number {
-        throw new Error("needs implementation");
+        return this.components.length;
     }
 
     public getComponent(i: number): string {
-        throw new Error("needs implementation");
+        if(!this.isValidIdx(i))return '';
+        return this.components[i];
     }
 
     public setComponent(i: number, c: string): void {
-        throw new Error("needs implementation");
+        if(this.isValidIdx(i)) this.components[i] = c;
     }
 
     public insert(i: number, c: string): void {
-        throw new Error("needs implementation");
+        if(this.isValidIdx(i)) this.components.splice(i, 0, c);
     }
 
     public append(c: string): void {
-        throw new Error("needs implementation");
+        if (c != undefined){
+            this.components.push(c);
+        } 
     }
 
     public remove(i: number): void {
-        throw new Error("needs implementation");
+        if(this.isValidIdx(i))this.components[i] = '';
     }
 
     public concat(other: Name): void {
-        throw new Error("needs implementation");
+        let idx: number = 0;
+        while(idx < other.getNoComponents()){
+            this.append(other.getComponent(idx));
+        }
     }
 
+    protected insertEscCh(i: string): string {
+        return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
+    }
+
+    protected delEscCh(i: string): string {
+        return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
+    }
+
+    protected isValidIdx(i: number): boolean {
+        if(i < 0 || i >= this.getNoComponents()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
