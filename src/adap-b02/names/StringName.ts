@@ -20,7 +20,13 @@ export class StringName implements Name {
         const components = this.splitRespectingEscapes();
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
+<<<<<<< HEAD
             str += this.replaceEscCh(components[i]);
+=======
+            if(components[i] === "") continue;
+            str += this.replaceEscCh(components[i]);
+            if(i < components.length-1 && components[i+1] !== "") str += delimiter;
+>>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
         }
         return str;
     }
@@ -29,7 +35,13 @@ export class StringName implements Name {
         const components = this.splitRespectingEscapes();
         let str: string = "";
         for(let i:number = 0; i < components.length; i++){
+<<<<<<< HEAD
             str += components[i];
+=======
+            if(components[i] === "") continue;
+            str += components[i] ;
+            if(i < components.length-1  && components[i+1] !== "") str += this.delimiter;
+>>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
         }
         return str;
     }
@@ -87,7 +99,11 @@ export class StringName implements Name {
 
     public append(c: string): void {
         this.length ++;
+<<<<<<< HEAD
         this.name += this.insertEscCh(this.delimiter);
+=======
+        this.name += this.delimiter + this.insertEscCh(c);
+>>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
     }
 
     public remove(n: number): void {
@@ -104,6 +120,43 @@ export class StringName implements Name {
     public concat(other: Name): void {
         this.name += this.delimiter + other.asDataString();
         this.length +=  other.getNoComponents();
+<<<<<<< HEAD
+    }
+
+    private insertEscCh(i: string): string {
+        return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
+    }
+
+    private replaceEscCh(i: string): string {
+        return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
+    }
+
+    private splitRespectingEscapes(): string[] {
+        const parts: string[] = [];
+        let currentPart = "";
+        let isEscaped = false;
+
+        for (let i = 0; i < this.name.length; i++) {
+            const char = this.name[i];
+
+            if (char === ESCAPE_CHARACTER && !isEscaped) {
+                
+                isEscaped = true;
+            } else if (char === this.delimiter && !isEscaped) {
+
+                parts.push(currentPart);
+                currentPart = "";
+            } else {
+                
+                currentPart += char;
+                isEscaped = false;
+            }
+        }
+        
+        parts.push(currentPart); 
+        return parts;
+=======
+>>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
     }
 
     private insertEscCh(i: string): string {
