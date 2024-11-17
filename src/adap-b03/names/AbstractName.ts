@@ -5,39 +5,72 @@ export abstract class AbstractName implements Name {
     protected delimiter: string = DEFAULT_DELIMITER;
 
     constructor(delimiter: string = DEFAULT_DELIMITER) {
-        throw new Error("needs implementation");
+        this.delimiter = delimiter;
     }
 
     public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation");
+        let count: number = this.getNoComponents();
+        if(count > 0){
+            let str: string = this.getComponent(0);
+            for(let i: number = 1; i < count; count++){
+                str += this.replaceEscCh(this.getComponent(i)) + delimiter;
+            }
+            return str;
+        }
+        return "";
     }
 
+    //TODO
     public toString(): string {
-        throw new Error("needs implementation");
+        let count: number = this.getNoComponents();
+        if(count > 0){
+            let str: string = this.getComponent(0);
+            for(let i: number = 1; i < count; count++){
+                str += this.getComponent(i) + this.delimiter;
+            }
+            return str;
+        }
+        return "";
     }
 
+    
     public asDataString(): string {
-        throw new Error("needs implementation");
+        let count: number = this.getNoComponents();
+        if(count > 0){
+            let str: string = this.getComponent(0);
+            for(let i: number = 1; i < count; count++){
+                str += this.getComponent(i) + this.delimiter;
+            }
+            return str;
+        }
+        return "";
     }
 
     public isEqual(other: Name): boolean {
-        throw new Error("needs implementation");
+        return (this.asString() == other.asString())
     }
 
     public getHashCode(): number {
-        throw new Error("needs implementation");
+        let hashCode: number = 0;
+        const s: string = this.asDataString();
+        for (let i = 0; i < s.length; i++) {
+            let c = s.charCodeAt(i);
+            hashCode = (hashCode << 5) - hashCode + c;
+            hashCode |= 0;
+        }
+        return hashCode;
     }
 
     public clone(): Name {
-        throw new Error("needs implementation");
+        return { ...this };
     }
 
     public isEmpty(): boolean {
-        throw new Error("needs implementation");
+        return (this.getNoComponents() === 0);
     }
 
     public getDelimiterCharacter(): string {
-        throw new Error("needs implementation");
+        return this.delimiter;
     }
 
     abstract getNoComponents(): number;
@@ -50,7 +83,17 @@ export abstract class AbstractName implements Name {
     abstract remove(i: number): void;
 
     public concat(other: Name): void {
-        throw new Error("needs implementation");
+        for(let i: number = 0; i < other.getNoComponents(); i++){
+            this.append(other.getComponent(i));
+        }
     }
 
+    protected insertEscCh(i: string): string {
+        return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
+    }
+
+    protected replaceEscCh(i: string): string {
+        return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
+    }
+ 
 }
