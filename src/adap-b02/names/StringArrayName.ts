@@ -16,17 +16,11 @@ export class StringArrayName implements Name {
         let counter: number = 0;
 
         while(counter < size){
-<<<<<<< HEAD
-            res += this.getComponent(counter);
-            if(counter != size-1){
-                res += delimiter;
-=======
             if(this.components[counter] !== ""){
                 res += this.getComponent(counter);
                 if(counter != size-1){
                     res += delimiter;
                 }
->>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
             }
             counter ++;
         }
@@ -39,17 +33,12 @@ export class StringArrayName implements Name {
         let counter: number = 0;
 
         while(counter < size){
-<<<<<<< HEAD
-            res += this.insertEscCh(this.getComponent(counter));
-            if(counter != size-1){
-                res += DEFAULT_DELIMITER;
-=======
             if(this.components[counter] !== ""){
                 res += this.insertEscCh(this.getComponent(counter));
                 if(counter != size-1){
                     res += DEFAULT_DELIMITER;
                 }
->>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
+
             }
             counter ++;
         }
@@ -113,8 +102,6 @@ export class StringArrayName implements Name {
             return true;
         }
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 888441dbafabaad8ce7f22198d670de4df40f6b8
+
