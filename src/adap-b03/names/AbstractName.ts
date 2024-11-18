@@ -20,7 +20,7 @@ export abstract class AbstractName implements Name {
         return "";
     }
 
-    //TODO
+    
     public toString(): string {
         let count: number = this.getNoComponents();
         if(count > 0){
@@ -39,7 +39,7 @@ export abstract class AbstractName implements Name {
         if(count > 0){
             let str: string = this.getComponent(0);
             for(let i: number = 1; i < count; count++){
-                str += this.getComponent(i) + this.delimiter;
+                str += this.getComponent(i) + DEFAULT_DELIMITER;
             }
             return str;
         }
@@ -96,4 +96,11 @@ export abstract class AbstractName implements Name {
         return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
     }
  
+    protected isValidIdx(i: number): boolean {
+        if(i < 0 || i >= this.getNoComponents()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

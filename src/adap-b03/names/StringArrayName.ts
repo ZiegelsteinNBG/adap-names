@@ -15,9 +15,11 @@ export class StringArrayName extends AbstractName {
     }
 
     getComponent(i: number): string {
+        if(!this.isValidIdx(i)) return "";
         return this.components[i];
     }
     setComponent(i: number, c: string) {
+        this.isValidIdx(i);
         this.components[i] = c;
     }
 
@@ -30,14 +32,8 @@ export class StringArrayName extends AbstractName {
             } 
     }
     remove(i: number) {
+        if(this.isValidIdx(i))
         this.components[i] = "";
     }
 
-    protected isValidIdx(i: number): boolean {
-        if(i < 0 || i >= this.getNoComponents()){
-            return false;
-        }else{
-            return true;
-        }
-    }
 }

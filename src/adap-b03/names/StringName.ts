@@ -37,6 +37,7 @@ export class StringName extends AbstractName {
     }
 
     insert(n: number, c: string) {
+        if(!this.isValidIdx(n))return
         ++this.length;
         const components = this.splitRespectingEscapes();
         this.name = "";
@@ -51,6 +52,7 @@ export class StringName extends AbstractName {
         ++this.length;
     }
     remove(i: number) {
+        if(!this.isValidIdx(i))return
         const components = this.splitRespectingEscapes();
         this.name = "";
         for(let n:number = 0; n < components.length; n++){
