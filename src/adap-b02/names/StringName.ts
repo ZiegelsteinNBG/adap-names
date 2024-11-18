@@ -147,39 +147,4 @@ export class StringName implements Name {
         return parts;
 
     }
-
-    private insertEscCh(i: string): string {
-        return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
-    }
-
-    private replaceEscCh(i: string): string {
-        return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
-    }
-
-    private splitRespectingEscapes(): string[] {
-        const parts: string[] = [];
-        let currentPart = "";
-        let isEscaped = false;
-
-        for (let i = 0; i < this.name.length; i++) {
-            const char = this.name[i];
-
-            if (char === ESCAPE_CHARACTER && !isEscaped) {
-                
-                isEscaped = true;
-            } else if (char === this.delimiter && !isEscaped) {
-
-                parts.push(currentPart);
-                currentPart = "";
-            } else {
-                
-                currentPart += char;
-                isEscaped = false;
-            }
-        }
-        
-        parts.push(currentPart); 
-        return parts;
-    }
-
 }
