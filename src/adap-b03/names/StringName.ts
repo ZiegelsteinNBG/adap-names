@@ -1,10 +1,11 @@
-import { Name, DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "./Name";
+import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
+import { Name } from "./Name";
 import { AbstractName } from "./AbstractName";
 
 export class StringName extends AbstractName {
 
     protected name: string = "";
-    protected length: number = 0;
+    protected noComponents: number = 0;
 
     constructor(other: string, delimiter?: string) {
         super(delimiter);
@@ -12,6 +13,7 @@ export class StringName extends AbstractName {
         this.length = 1;
     }
 
+<<<<<<< HEAD
     getNoComponents(): number {
         return this.length;
     }
@@ -89,5 +91,66 @@ export class StringName extends AbstractName {
         
         parts.push(currentPart); 
         return parts;
+=======
+    public clone(): Name {
+        throw new Error("needs implementation");
     }
+
+    public asString(delimiter: string = this.delimiter): string {
+        throw new Error("needs implementation");
+    }
+
+    public toString(): string {
+        throw new Error("needs implementation");
+    }
+
+    public asDataString(): string {
+        throw new Error("needs implementation");
+    }
+
+    public isEqual(other: Name): boolean {
+        throw new Error("needs implementation");
+>>>>>>> 15d5493659b8e30ea180d58abe21ceea7223432d
+    }
+
+    public getHashCode(): number {
+        throw new Error("needs implementation");
+    }
+
+    public isEmpty(): boolean {
+        throw new Error("needs implementation");
+    }
+
+    public getDelimiterCharacter(): string {
+        throw new Error("needs implementation");
+    }
+
+    public getNoComponents(): number {
+        throw new Error("needs implementation");
+    }
+
+    public getComponent(i: number): string {
+        throw new Error("needs implementation");
+    }
+
+    public setComponent(i: number, c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public insert(i: number, c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public append(c: string) {
+        throw new Error("needs implementation");
+    }
+
+    public remove(i: number) {
+        throw new Error("needs implementation");
+    }
+
+    public concat(other: Name): void {
+        throw new Error("needs implementation");
+    }
+
 }

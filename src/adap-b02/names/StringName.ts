@@ -1,11 +1,11 @@
-import { Name, DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "./Name";
+import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
+import { Name } from "./Name";
 
 export class StringName implements Name {
 
     protected delimiter: string = DEFAULT_DELIMITER;
-
     protected name: string = "";
-    protected length: number = 0;
+    protected noComponents: number = 0;
 
     // String input is a single component
     constructor(other: string, delimiter?: string) {
@@ -39,6 +39,7 @@ export class StringName implements Name {
         return str;
     }
 
+<<<<<<< HEAD
     public isEmpty(): boolean {
         const components = this.splitRespectingEscapes();
         for(let i:number = 0; i < components.length; i++){
@@ -51,6 +52,14 @@ export class StringName implements Name {
 
     public getDelimiterCharacter(): string {
         return this.delimiter;
+=======
+    public getDelimiterCharacter(): string {
+        throw new Error("needs implementation");
+    }
+
+    public isEmpty(): boolean {
+        throw new Error("needs implementation");
+>>>>>>> 15d5493659b8e30ea180d58abe21ceea7223432d
     }
 
     public getNoComponents(): number {
