@@ -1,5 +1,6 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
+import { IllegalArgumentException} from "../common/IllegalArgumentException";
 
 enum FileState {
     OPEN,
@@ -12,6 +13,8 @@ export class File extends Node {
     protected state: FileState = FileState.CLOSED;
 
     constructor(baseName: string, parent: Directory) {
+        IllegalArgumentException.assertIsNotNullOrUndefined(baseName);
+        IllegalArgumentException.assertIsNotNullOrUndefined(parent);
         super(baseName, parent);
     }
 
