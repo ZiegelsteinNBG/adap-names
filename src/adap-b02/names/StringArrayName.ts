@@ -7,6 +7,7 @@ export class StringArrayName implements Name {
     protected components: string[] = [];
 
     constructor(other: string[], delimiter?: string) {
+<<<<<<< HEAD
         if(other !== undefined) this.components = other;
         if(delimiter !== undefined) this.delimiter = delimiter;
     }
@@ -86,6 +87,53 @@ export class StringArrayName implements Name {
         while(idx < other.getNoComponents()){
             this.append(other.getComponent(idx));
         }
+=======
+        throw new Error("needs implementation or deletion");
+    }
+
+    public asString(delimiter: string = this.delimiter): string {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public asDataString(): string {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public getDelimiterCharacter(): string {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public isEmpty(): boolean {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public getNoComponents(): number {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public getComponent(i: number): string {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public setComponent(i: number, c: string): void {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public insert(i: number, c: string): void {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public append(c: string): void {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public remove(i: number): void {
+        throw new Error("needs implementation or deletion");
+    }
+
+    public concat(other: Name): void {
+        throw new Error("needs implementation or deletion");
+>>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
     }
 
     protected insertEscCh(i: string): string {

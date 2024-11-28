@@ -1,10 +1,6 @@
 import { Node } from "./Node";
 import { Directory } from "./Directory";
-<<<<<<< HEAD
-import { IllegalArgumentException} from "../common/IllegalArgumentException";
-=======
 import { MethodFailedException } from "../common/MethodFailedException";
->>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
 
 enum FileState {
     OPEN,
@@ -17,8 +13,6 @@ export class File extends Node {
     protected state: FileState = FileState.CLOSED;
 
     constructor(baseName: string, parent: Directory) {
-        IllegalArgumentException.assertIsNotNullOrUndefined(baseName);
-        IllegalArgumentException.assertIsNotNullOrUndefined(parent);
         super(baseName, parent);
     }
 
@@ -27,8 +21,26 @@ export class File extends Node {
     }
 
     public read(noBytes: number): Int8Array {
-        // read something
-        return new Int8Array();
+        let result: Int8Array = new Int8Array(noBytes);
+        // do something
+
+        let tries: number = 0;
+        for (let i: number = 0; i < noBytes; i++) {
+            try {
+                result[i] = this.readNextByte();
+            } catch(ex) {
+                tries++;
+                if (ex instanceof MethodFailedException) {
+                    // Oh no! What @todo?!
+                }
+            }
+        }
+
+        return result;
+    }
+
+    protected readNextByte(): number {
+        return 0; // @todo
     }
 
     public close(): void {
