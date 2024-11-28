@@ -11,7 +11,7 @@ export class StringName implements Name {
     constructor(other: string, delimiter?: string) {
         if(other !== undefined){
             this.name = other;
-            this.length++;
+            this.noComponents++;
         } 
         if(delimiter !== undefined) this.delimiter = delimiter;
     }
@@ -39,7 +39,6 @@ export class StringName implements Name {
         return str;
     }
 
-<<<<<<< HEAD
     public isEmpty(): boolean {
         const components = this.splitRespectingEscapes();
         for(let i:number = 0; i < components.length; i++){
@@ -52,22 +51,14 @@ export class StringName implements Name {
 
     public getDelimiterCharacter(): string {
         return this.delimiter;
-=======
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation");
->>>>>>> 15d5493659b8e30ea180d58abe21ceea7223432d
     }
 
     public getNoComponents(): number {
-        return this.length;
+        return this.noComponents;
     }
 
     public getComponent(x: number): string {
-        if (x < 0 || x >= this.length) {
+        if (x < 0 || x >= this.noComponents) {
             throw new Error("Index out of bounds");
         }
         const components = this.splitRespectingEscapes();
@@ -88,7 +79,7 @@ export class StringName implements Name {
     }
 
     public insert(n: number, c: string): void {
-        ++this.length;
+        ++this.noComponents;
         const components = this.splitRespectingEscapes();
         this.name = "";
         for(let i:number = 0; i < components.length; i++){
@@ -100,7 +91,7 @@ export class StringName implements Name {
     }
 
     public append(c: string): void {
-        this.length ++;
+        this.noComponents ++;
         this.name += this.delimiter + this.insertEscCh(c);
 
     }
@@ -118,7 +109,7 @@ export class StringName implements Name {
 
     public concat(other: Name): void {
         this.name += this.delimiter + other.asDataString();
-        this.length +=  other.getNoComponents();
+        this.noComponents +=  other.getNoComponents();
 
     }
 

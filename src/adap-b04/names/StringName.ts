@@ -13,7 +13,7 @@ export class StringName extends AbstractName {
     constructor(other: string, delimiter?: string) {
         super(delimiter);
         this.name = other;
-        this.noComponents ++;
+        this.noComponents = this.count(other);
     }
 
     // public clone(): Name {
@@ -50,15 +50,15 @@ export class StringName extends AbstractName {
 
     public getNoComponents(): number {
         InvalidStateException.assertIsNotNullOrUndefined(this.name);
-        InvalidStateException.assertCondition((this.getNoComponents() > 0),"Cannot set a component on an empty components array.");
+        InvalidStateException.assertCondition((this.noComponents > 0),"Cannot set a component on an empty components array.");
         return this.noComponents;
     }
 
     public getComponent(i: number): string {
         InvalidStateException.assertIsNotNullOrUndefined(this.name);
-        InvalidStateException.assertCondition((this.getNoComponents() > 0),"Cannot set a component on an empty components array.");
+        InvalidStateException.assertCondition((this.noComponents > 0),"Cannot set a component on an empty components array.");
     
-        IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+        IllegalArgumentException.assertCondition((i >= 0 && i < this.noComponents), "Index out of Bounds");
         
         const components = this.splitRespectingEscapes();
         return components[i];
@@ -66,9 +66,9 @@ export class StringName extends AbstractName {
 
     public setComponent(i: number, c: string) {
         InvalidStateException.assertIsNotNullOrUndefined(this.name);
-        InvalidStateException.assertCondition((this.getNoComponents() > 0),"Cannot set a component on an empty components array.");
+        InvalidStateException.assertCondition((this.noComponents > 0),"Cannot set a component on an empty components array.");
     
-        IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+        IllegalArgumentException.assertCondition((i >= 0 && i < this.noComponents), "Index out of Bounds");
         IllegalArgumentException.assertIsNotNullOrUndefined(c);
        
         const components = this.splitRespectingEscapes();
@@ -105,9 +105,9 @@ export class StringName extends AbstractName {
     
         IllegalArgumentException.assertIsNotNullOrUndefined(c);
         let preLen = this.getNoComponents();
-        this.name += c;
+        this.name += this.delimiter+c;
         ++this.noComponents;
-        MethodFailureException.assertCondition((preLen === this.getNoComponents()), "Failed to remove: Comp not empty");
+        MethodFailureException.assertCondition((preLen+1 === this.getNoComponents()), "Failed to remove: Comp not empty");
     }
 
     public remove(i: number) {
@@ -121,12 +121,13 @@ export class StringName extends AbstractName {
         this.name = "";
         for(let n:number = 0; n < components.length; n++){
             if(i !== n){
-                this.name += components[i];
+                this.name += components[n];
             }else{
                 del = components[i];
             }
-            this.name += this.delimiter;
+            if(n != 0 && n != components.length-1)this.name += this.delimiter;
         }
+        this.noComponents--;
         MethodFailureException.assertCondition((this.splitRespectingEscapes()[i] !== del), "Failed to remove: Comp not empty");
     
     }
@@ -155,8 +156,39 @@ export class StringName extends AbstractName {
         parts.push(currentPart); 
         return parts;
     }
-    // public concat(other: Name): void {
-    //     throw new Error("needs implementation");
-    // }
+
+    private count(c: string): number{
+        const parts: string[] = [];
+        let currentPart = "";
+        let isEscaped = false;
+        let count = 1;
+
+        for (let i = 0; i < this.name.length; i++) {
+            const char = this.name[i];
+
+            if (char === ESCAPE_CHARACTER && !isEscaped) {
+                
+                isEscaped = true;
+            } else if (char === this.delimiter && !isEscaped) {
+
+                parts.push(currentPart);
+                count++;
+                currentPart = "";
+            } else {
+                currentPart += char;
+                isEscaped = false;
+            }
+        }
+        
+        parts.push(currentPart); 
+        return count;
+    }
+    protected insertEscCh(i: string): string {
+        return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
+    }
+
+    protected replaceEscCh(i: string): string {
+        return (i || '').replaceAll(ESCAPE_CHARACTER + this.delimiter, this.delimiter);
+    }
 
 }

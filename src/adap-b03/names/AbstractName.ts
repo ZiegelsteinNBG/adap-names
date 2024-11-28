@@ -9,9 +9,6 @@ export abstract class AbstractName implements Name {
         this.delimiter = delimiter;
     }
 
-    public clone(): Name {
-        throw new Error("needs implementation");
-    }
 
     public asString(delimiter: string = this.delimiter): string {
         let count: number = this.getNoComponents();
@@ -66,13 +63,10 @@ export abstract class AbstractName implements Name {
         return hashCode;
     }
 
-<<<<<<< HEAD
     public clone(): Name {
         return { ...this };
     }
 
-=======
->>>>>>> 15d5493659b8e30ea180d58abe21ceea7223432d
     public isEmpty(): boolean {
         return (this.getNoComponents() === 0);
     }

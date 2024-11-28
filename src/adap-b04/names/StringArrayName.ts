@@ -57,7 +57,7 @@ export class StringArrayName extends AbstractName {
     public getComponent(i: number): string {
         InvalidStateException.assertIsNotNullOrUndefined(this.components);
         InvalidStateException.assertCondition((this.components.length > 0),"Cannot set a component on an empty components array.");
-        IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+        IllegalArgumentException.assertCondition((i >= 0 && i < this.components.length), "Index out of Bounds");
         return this.components[i];
     }
 
@@ -65,7 +65,7 @@ export class StringArrayName extends AbstractName {
         InvalidStateException.assertIsNotNullOrUndefined(this.components);
         InvalidStateException.assertCondition((this.components.length > 0),"Cannot set a component on an empty components array.");
        
-        IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+        IllegalArgumentException.assertCondition((i >= 0 && i < this.components.length), "Index out of Bounds");
         IllegalArgumentException.assertIsNotNullOrUndefined(c);
         return this.components[i];
     }
@@ -74,7 +74,7 @@ export class StringArrayName extends AbstractName {
         InvalidStateException.assertIsNotNullOrUndefined(this.components);
         InvalidStateException.assertCondition((this.components.length > 0),"Cannot set a component on an empty components array.");
        
-        IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+        IllegalArgumentException.assertCondition((i >= 0 && i < this.components.length), "Index out of Bounds");
         IllegalArgumentException.assertIsNotNullOrUndefined(c);
         let prevLen: number = this.components.length;
         this.components.splice(i, 0, c);
@@ -87,14 +87,14 @@ export class StringArrayName extends AbstractName {
             IllegalArgumentException.assertIsNotNullOrUndefined(c);
             let prevLen: number = this.components.length;
             this.components.push(c);
-            MethodFailureException.assertCondition((this.getNoComponents() == prevLen+1), "Failed to append: incorrect Comp No");
+            MethodFailureException.assertCondition((this.components.length == prevLen+1), "Failed to append: incorrect Comp No");
     }
 
     public remove(i: number) {
             InvalidStateException.assertIsNotNullOrUndefined(this.components);
             InvalidStateException.assertCondition((this.components.length > 0),"Cannot set a component on an empty components array.");
         
-            IllegalArgumentException.assertCondition((i >= 0 && i < this.getNoComponents()), "Index out of Bounds");
+            IllegalArgumentException.assertCondition((i >= 0 && i < this.components.length), "Index out of Bounds");
             this.components[i] = "";
             MethodFailureException.assertCondition((this.components[i] === ""), "Failed to remove: Comp not empty");
     }

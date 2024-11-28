@@ -24,8 +24,9 @@ export abstract class AbstractName implements Name {
         let count: number = this.getNoComponents();
         if(count > 0){
             let str: string = this.getComponent(0);
-            for(let i: number = 1; i < count; count++){
-                str += this.replaceEscCh(this.getComponent(i)) + delimiter;
+            for(let i: number = 1; i < count; i++){
+                if(this.getComponent(i-1) !="" )str += delimiter;
+                str +=  this.replaceEscCh(this.getComponent(i)) ;
             }
             MethodFailureException.assertIsNotNullOrUndefined(str);
             return str;
@@ -38,8 +39,9 @@ export abstract class AbstractName implements Name {
         let count: number = this.getNoComponents();
         if(count > 0){
             let str: string = this.getComponent(0);
-            for(let i: number = 1; i < count; count++){
-                str += this.getComponent(i) + this.delimiter;
+            for(let i: number = 1; i < count; i++){
+                if(this.getComponent(i-1) !="")str += this.delimiter;
+                str += this.getComponent(i);
             }
             MethodFailureException.assertIsNotNullOrUndefined(str);
             return str;
@@ -52,7 +54,7 @@ export abstract class AbstractName implements Name {
         let count: number = this.getNoComponents();
         if(count > 0){
             let str: string = this.getComponent(0);
-            for(let i: number = 1; i < count; count++){
+            for(let i: number = 1; i < count; i++){
                 str += this.getComponent(i) + DEFAULT_DELIMITER;
             }
             MethodFailureException.assertIsNotNullOrUndefined(str);
@@ -104,20 +106,11 @@ export abstract class AbstractName implements Name {
         }
         MethodFailureException.assertCondition((this.getNoComponents() === prevNo+other.getNoComponents()), "Failed at concat, wrong length")
     }
-
     protected insertEscCh(i: string): string {
         return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
     }
 
     protected replaceEscCh(i: string): string {
         return i.replaceAll(ESCAPE_CHARACTER+this.delimiter, this.delimiter);
-    }
- 
-    protected isValidIdx(i: number): boolean {
-        if(i < 0 || i >= this.getNoComponents()){
-            return false;
-        }else{
-            return true;
-        }
     }
 }

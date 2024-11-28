@@ -10,16 +10,15 @@ export class StringName extends AbstractName {
     constructor(other: string, delimiter?: string) {
         super(delimiter);
         this.name = other;
-        this.length = 1;
+        this.noComponents = 1;
     }
 
-<<<<<<< HEAD
     getNoComponents(): number {
-        return this.length;
+        return this.noComponents;
     }
 
     getComponent(i: number): string {
-        if (i < 0 || i >= this.length) {
+        if (i < 0 || i >= this.noComponents) {
             throw new Error("Index out of bounds");
         }
         const components = this.splitRespectingEscapes();
@@ -40,7 +39,7 @@ export class StringName extends AbstractName {
 
     insert(n: number, c: string) {
         if(!this.isValidIdx(n))return
-        ++this.length;
+        ++this.noComponents;
         const components = this.splitRespectingEscapes();
         this.name = "";
         for(let i:number = 0; i < components.length; i++){
@@ -51,7 +50,8 @@ export class StringName extends AbstractName {
         }
     }
     append(c: string) {
-        ++this.length;
+        this.name += c;
+        ++this.noComponents;
     }
     remove(i: number) {
         if(!this.isValidIdx(i))return
@@ -91,66 +91,6 @@ export class StringName extends AbstractName {
         
         parts.push(currentPart); 
         return parts;
-=======
-    public clone(): Name {
-        throw new Error("needs implementation");
-    }
-
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation");
-    }
-
-    public toString(): string {
-        throw new Error("needs implementation");
-    }
-
-    public asDataString(): string {
-        throw new Error("needs implementation");
-    }
-
-    public isEqual(other: Name): boolean {
-        throw new Error("needs implementation");
->>>>>>> 15d5493659b8e30ea180d58abe21ceea7223432d
-    }
-
-    public getHashCode(): number {
-        throw new Error("needs implementation");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation");
-    }
-
-    public getNoComponents(): number {
-        throw new Error("needs implementation");
-    }
-
-    public getComponent(i: number): string {
-        throw new Error("needs implementation");
-    }
-
-    public setComponent(i: number, c: string) {
-        throw new Error("needs implementation");
-    }
-
-    public insert(i: number, c: string) {
-        throw new Error("needs implementation");
-    }
-
-    public append(c: string) {
-        throw new Error("needs implementation");
-    }
-
-    public remove(i: number) {
-        throw new Error("needs implementation");
-    }
-
-    public concat(other: Name): void {
-        throw new Error("needs implementation");
     }
 
 }
