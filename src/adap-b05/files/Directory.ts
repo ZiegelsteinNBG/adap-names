@@ -18,6 +18,7 @@ export class Directory extends Node {
 
     public findNodes(bn: string): Set<Node> {
         let res: Set<Node> = new Set<Node>();
+        if(this.baseName === bn) res.add(this);
         for(let ch of this.childNodes){
              ch.findNodes(bn).forEach(n => res.add(n))
         }
