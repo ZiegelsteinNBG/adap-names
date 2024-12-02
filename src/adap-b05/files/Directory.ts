@@ -16,4 +16,11 @@ export class Directory extends Node {
         this.childNodes.delete(cn); // Yikes! Should have been called remove
     }
 
+    public findNodes(bn: string): Set<Node> {
+        let res: Set<Node> = new Set<Node>();
+        for(let ch of this.childNodes){
+             ch.findNodes(bn).forEach(n => res.add(n))
+        }
+        return res;
+    }
 }

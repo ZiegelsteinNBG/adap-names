@@ -1,9 +1,13 @@
+import { error } from "console";
 import { ExceptionType, AssertionDispatcher } from "../common/AssertionDispatcher";
+import { Exception } from "../common/Exception";
 import { IllegalArgumentException } from "../common/IllegalArgumentException";
 import { InvalidStateException } from "../common/InvalidStateException";
+import { ServiceFailureException } from "../common/ServiceFailureException";
 
 import { Name } from "../names/Name";
 import { Directory } from "./Directory";
+import { RootNode } from "./RootNode";
 
 export class Node {
 
@@ -58,7 +62,27 @@ export class Node {
      * @param bn basename of node being searched for
      */
     public findNodes(bn: string): Set<Node> {
-        throw new Error("needs implementation or deletion");
+        this.assertIsValidBaseName(bn, ExceptionType.PRECONDITION);
+        
+        let resn = new Set<Node>();
+        try{
+            if(bn === this.getBaseName())resn.add(this);
+            // if(this.getParentNode() === RootNode.getRootNode() ) return resn;
+            // let t_res: Set<Node> = this.getParentNode().findNodes(bn);
+            // for(let i: number = 0; i < t_res.size; i++){
+            // this.parentNode.findNodes(bn)?.forEach(node => resn?.add(node));    
+            // } 
+            
+            this.assertClassInvariants();
+        }catch(error)
+        {
+            if(error instanceof ServiceFailureException){
+                throw error;
+            }
+            ServiceFailureException.assertCondition(false, "Failed findNotes()", error as Exception);
+        }
+        return resn;
+        
     }
 
     protected assertClassInvariants(): void {
