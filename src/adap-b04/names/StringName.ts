@@ -1,7 +1,7 @@
 import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
 import { Name } from "./Name";
 import { AbstractName } from "./AbstractName";
-import { MethodFailureException } from "../common/MethodFailureException";
+import { MethodFailedException } from "../common/MethodFailedException";
 import { InvalidStateException } from "../common/InvalidStateException";
 import { IllegalArgumentException} from "../common/IllegalArgumentException";
 
@@ -11,7 +11,6 @@ export class StringName extends AbstractName {
     protected noComponents: number = 0;
 
     constructor(other: string, delimiter?: string) {
-<<<<<<< HEAD
         super(delimiter);
         this.name = other;
         this.noComponents = this.count(other);
@@ -108,7 +107,7 @@ export class StringName extends AbstractName {
         let preLen = this.getNoComponents();
         this.name += this.delimiter+c;
         ++this.noComponents;
-        MethodFailureException.assertCondition((preLen+1 === this.getNoComponents()), "Failed to remove: Comp not empty");
+        MethodFailedException.assertCondition((preLen+1 === this.getNoComponents()), "Failed to remove: Comp not empty");
     }
 
     public remove(i: number) {
@@ -129,7 +128,7 @@ export class StringName extends AbstractName {
             if(n != 0 && n != components.length-1)this.name += this.delimiter;
         }
         this.noComponents--;
-        MethodFailureException.assertCondition((this.splitRespectingEscapes()[i] !== del), "Failed to remove: Comp not empty");
+        MethodFailedException.assertCondition((this.splitRespectingEscapes()[i] !== del), "Failed to remove: Comp not empty");
     
     }
 
@@ -190,66 +189,6 @@ export class StringName extends AbstractName {
 
     protected replaceEscCh(i: string): string {
         return (i || '').replaceAll(ESCAPE_CHARACTER + this.delimiter, this.delimiter);
-=======
-        super();
-        throw new Error("needs implementation or deletion");
-    }
-
-    public clone(): Name {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asDataString(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEqual(other: Name): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getHashCode(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getComponent(i: number): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public setComponent(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public insert(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public append(c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public remove(i: number) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public concat(other: Name): void {
-        throw new Error("needs implementation or deletion");
->>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
     }
 
 }

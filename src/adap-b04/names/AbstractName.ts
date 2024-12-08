@@ -1,6 +1,6 @@
 import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
 import { Name } from "./Name";
-import { MethodFailureException } from "../common/MethodFailureException";
+import { MethodFailedException } from "../common/MethodFailedException";
 import { InvalidStateException } from "../common/InvalidStateException";
 import { IllegalArgumentException} from "../common/IllegalArgumentException";
 
@@ -9,14 +9,13 @@ export abstract class AbstractName implements Name {
     protected delimiter: string = DEFAULT_DELIMITER;
 
     constructor(delimiter: string = DEFAULT_DELIMITER) {
-<<<<<<< HEAD
         this.delimiter = delimiter;
     }
 
     public clone(): Name {
         InvalidStateException.assertCondition(!this.isEmpty(), "Kein Component vorhanden");
         let n = { ...this };
-        MethodFailureException.assertIsNotNullOrUndefined(n);
+        MethodFailedException.assertIsNotNullOrUndefined(n);
         return n;
     }
 
@@ -29,7 +28,7 @@ export abstract class AbstractName implements Name {
                 if(this.getComponent(i-1) !="" )str += delimiter;
                 str +=  this.replaceEscCh(this.getComponent(i)) ;
             }
-            MethodFailureException.assertIsNotNullOrUndefined(str);
+            MethodFailedException.assertIsNotNullOrUndefined(str);
             return str;
         }
         return "";
@@ -44,7 +43,7 @@ export abstract class AbstractName implements Name {
                 if(this.getComponent(i-1) !="")str += this.delimiter;
                 str += this.getComponent(i);
             }
-            MethodFailureException.assertIsNotNullOrUndefined(str);
+            MethodFailedException.assertIsNotNullOrUndefined(str);
             return str;
         }
         return "";
@@ -58,7 +57,7 @@ export abstract class AbstractName implements Name {
             for(let i: number = 1; i < count; i++){
                 str += this.getComponent(i) + DEFAULT_DELIMITER;
             }
-            MethodFailureException.assertIsNotNullOrUndefined(str);
+            MethodFailedException.assertIsNotNullOrUndefined(str);
             return str;
         }
         return "";
@@ -77,7 +76,7 @@ export abstract class AbstractName implements Name {
             hashCode = (hashCode << 5) - hashCode + c;
             hashCode |= 0;
         }
-        MethodFailureException.assertIsNotNullOrUndefined(hashCode);
+        MethodFailedException.assertIsNotNullOrUndefined(hashCode);
         return hashCode;
     }
 
@@ -88,41 +87,6 @@ export abstract class AbstractName implements Name {
     public getDelimiterCharacter(): string {
         InvalidStateException.assertIsNotNullOrUndefined(this.delimiter);
         return this.delimiter;
-=======
-        throw new Error("needs implementation or deletion");
-    }
-
-    public clone(): Name {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public toString(): string {
-        return this.asDataString();
-    }
-
-    public asDataString(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEqual(other: Name): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getHashCode(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation or deletion");
->>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
     }
 
     abstract getNoComponents(): number;
@@ -135,19 +99,15 @@ export abstract class AbstractName implements Name {
     abstract remove(i: number): void;
 
     public concat(other: Name): void {
-<<<<<<< HEAD
         IllegalArgumentException.assertIsNotNullOrUndefined(other);
         let prevNo: number = this.getNoComponents();
         for(let i: number = 0; i < other.getNoComponents(); i++){
             this.append(other.getComponent(i));
         }
-        MethodFailureException.assertCondition((this.getNoComponents() === prevNo+other.getNoComponents()), "Failed at concat, wrong length")
+        MethodFailedException.assertCondition((this.getNoComponents() === prevNo+other.getNoComponents()), "Failed at concat, wrong length")
     }
     protected insertEscCh(i: string): string {
         return i.replaceAll(this.delimiter, ESCAPE_CHARACTER+this.delimiter);
-=======
-        throw new Error("needs implementation or deletion");
->>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
     }
 
     protected replaceEscCh(i: string): string {

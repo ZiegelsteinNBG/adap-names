@@ -1,4 +1,11 @@
 import { Node } from "./Node";
+import { error } from "console";
+import { ExceptionType, AssertionDispatcher } from "../common/AssertionDispatcher";
+import { Exception } from "../common/Exception";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
+import { InvalidStateException } from "../common/InvalidStateException";
+import { ServiceFailureException } from "../common/ServiceFailureException";
+
 
 export class Directory extends Node {
 
@@ -17,11 +24,16 @@ export class Directory extends Node {
     }
 
     public findNodes(bn: string): Set<Node> {
+
         let res: Set<Node> = new Set<Node>();
+ 
         if(this.baseName === bn) res.add(this);
         for(let ch of this.childNodes){
-             ch.findNodes(bn).forEach(n => res.add(n))
+                ch.findNodes(bn).forEach(n => res.add(n))
         }
+    
+
         return res;
     }
+
 }
