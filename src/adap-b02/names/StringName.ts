@@ -9,7 +9,6 @@ export class StringName implements Name {
 
     // String input is a single component
     constructor(other: string, delimiter?: string) {
-<<<<<<< HEAD
         if(other !== undefined){
             this.name = other;
             this.noComponents++;
@@ -112,53 +111,6 @@ export class StringName implements Name {
         this.name += this.delimiter + other.asDataString();
         this.noComponents +=  other.getNoComponents();
 
-=======
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asDataString(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getComponent(x: number): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public setComponent(n: number, c: string): void {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public insert(n: number, c: string): void {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public append(c: string): void {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public remove(n: number): void {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public concat(other: Name): void {
-        throw new Error("needs implementation or deletion");
->>>>>>> e42a56b49aa591786b0ab19e98e56ff3d3fa09d5
     }
 
     private insertEscCh(i: string): string {
